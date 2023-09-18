@@ -102,4 +102,10 @@ Temporary Items
 .history
 .ionide
 
+# Ignorer le dossier database_file et tout son contenu
+database_file/
+
+# Ignorer tous les fichiers .txt dans le dossier database_file
+database_file/*.txt
+
 # End of https://www.toptal.com/developers/gitignore/api/c++,visualstudiocode,git,macos
