@@ -2,6 +2,7 @@
 #include <fstream> 
 #include <string>
 #include <vector>
+#include <filesystem>   
 
 const std::string DATABASE_FOLDER = "note_database/"; 
 
@@ -13,6 +14,13 @@ struct Note
 
 void addNote(const std::string username, const Note& note)
 {
+    if (!std::__fs::filesystem::exists(DATABASE_FOLDER)) {
+        if (!std::__fs::filesystem::create_directory(DATABASE_FOLDER)) {
+            std::cerr << "DATABASE FOLDER can't be created";
+            return;
+        }
+    }
+
     std::string fileName = DATABASE_FOLDER + username + "_notes.txt";
     std::ofstream databaseFile(fileName, std::ios::app);
 
@@ -33,7 +41,7 @@ std::vector<Note> searchNote(const std::string username)
     std::vector<Note> notes;
     
     std::string fileName = DATABASE_FOLDER + username + "_notes.txt";
-    std::ifstream databaseFile(fileName, std::ios::app);
+    std::ifstream databaseFile(fileName, std::ios::in);
 
     if (databaseFile.is_open())
     {
@@ -55,7 +63,7 @@ std::vector<Note> searchNote(const std::string username)
     }
     else 
     {
-        std::cerr << "Error while oppening the file" << std::endl;
+        std::cerr << "Error while searching the file" << std::endl;
     }
 
     return notes;
@@ -74,5 +82,6 @@ struct Note createNote(const std::string title, const std::string content) {
 std::string viewNote(Note& note) {
 
     std::string result; 
+    result = "Tittle : " + note.title + "\nContent : " + note.content + "\n";
     return result;
 }
