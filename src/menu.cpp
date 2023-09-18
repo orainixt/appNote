@@ -12,7 +12,7 @@ void displayUserMenu() {
 
 void displayOptionMenu() {
     cout << "=================== Menu =================" << endl;
-    cout << "==== Qu'est ce que vous voulez faire =====" << endl;
+    cout << "========= Que voulez vous faire ==========" << endl;
     cout << "===== Option 1 : Voir vos notes ==========" << endl;
     cout << "== Option 2 : Rentrer une nouvelle note ==" << endl;
     cout << "======= Veuillez entrer 1 ou 2 ===========" << endl;

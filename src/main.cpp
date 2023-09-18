@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+#include <vector>
+
 #include "menu.h"
 #include "fcts.h"
 
@@ -13,6 +15,7 @@ int main() {
     Note note;
     string title;
     string content;
+    std::vector<Note> notes;
 
     std::cout << "\033[2J\033[1;1H";
 
@@ -24,7 +27,8 @@ int main() {
 
     switch (firstOption) {
         case 1: // Option voir vos notes
-            searchNote(username);
+            notes = searchNote(username);
+            viewNote(notes);
             break;
         case 2: // Option retrer une note
             displayTitleNote();
