@@ -4,36 +4,15 @@
 #include <vector>
 #include <filesystem>   
 
-const std::string DATABASE_FOLDER = "note_database/"; 
-
 struct Note
 {   
     std::string title; // Title of the note
     std::string content; // The note he wants to add 
 };
 
-void addNote(const std::string username, const Note& note)
-{
-    if (!std::__fs::filesystem::exists(DATABASE_FOLDER)) {
-        if (!std::__fs::filesystem::create_directory(DATABASE_FOLDER)) {
-            std::cerr << "DATABASE FOLDER can't be created";
-            return;
-        }
-    }
+void addNote(const Note& note)
+{   
 
-    std::string fileName = DATABASE_FOLDER + username + "_notes.txt";
-    std::ofstream databaseFile(fileName, std::ios::app);
-
-    if (databaseFile.is_open())
-    {
-        databaseFile << note.title << " : " << note.content << std::endl;
-        databaseFile.close();
-        std::cout << "The note of " << username << " has been added." << std::endl;
-    }
-    else 
-    {
-        std::cerr << "Error while oppening the file" << std::endl; 
-    }
 }
 
 std::vector<Note> searchNote(const std::string username)
@@ -102,4 +81,19 @@ void viewNote(std::vector<Note>& notes) {
     }
 
     std::cout << result;
+}
+
+// Fonction pour récupérer les notes sous forme de tableau
+extern "C" Note* get_notes(int* length) {
+    // Remplacer par votre logique pour récupérer les notes du vecteur
+    std::vector<Note> notes = {/* ... */};
+
+    // Allouer et remplir le tableau de notes
+    Note* note_array = new Note[notes.size()];
+    *length = notes.size();
+    for (size_t i = 0; i < notes.size(); ++i) {
+        note_array[i] = notes[i];
+    }
+
+    return note_array;
 }
