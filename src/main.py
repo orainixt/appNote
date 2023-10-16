@@ -18,9 +18,10 @@ def main() :
             file.write("")
         
     else : 
-        ("Opening your file ...")
-        fct.loadData(dataFilePath)
-        
+        print("Opening your file ...")
+        userData = fct.loadData(dataFilePath)
+        userNotes = fct.createNoteFromData(userData)
+
     # Creation of the main window 
     window = tk.Tk()
     window.title("My Notes")
