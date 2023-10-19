@@ -1,13 +1,13 @@
 import tkinter as tk
 import os 
-import classNote as cNote
+from classNote import Note
 import functions as fct 
 
-def main() :
+# Functions used in the loop 
+def createNewNote() :
+    fct.launchNewNoteWindow()
 
-    # Functions used in the loop 
-    def createNewNote() :
-        fct.launchNewNoteWindow()
+def main() :
 
     # Open data : 
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -21,6 +21,7 @@ def main() :
         print("Opening your file ...")
         userData = fct.loadData(dataFilePath)
         userNotes = fct.createNoteFromData(userData)
+    
 
     # Creation of the main window 
     window = tk.Tk()
@@ -29,7 +30,11 @@ def main() :
 
     # Creation of the differents object of the app 
     # Text field with all the notes
-
+    for note in userNotes : 
+        noteLabel = tk.StringVar(value=note.title + "\n" + note.content)
+        noteTxt = tk.label(window,textvariable=noteLabel,width=30, height=5, relief="solid")
+        noteTxt.pack(pady=20) 
+        noteTxt.config(state="disabled")
 
     # Button for the New Note
     buttonCreate = tk.Button(window, text="Create New Note", command=createNewNote,

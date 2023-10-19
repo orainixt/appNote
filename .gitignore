@@ -102,10 +102,22 @@ Temporary Items
 .history
 .ionide
 
-# Ignorer le dossier database_file et tout son contenu
-database_file/
+# Fichiers Python compilés
+__pycache__/
 
-# Ignorer tous les fichiers .txt dans le dossier database_file
-database_file/*.txt
+# Fichiers de sortie de tests
+*.pyc
+
+# Dossiers générés par py.test
+.pytest_cache/
+
+# Environnement virtuel Python
+venv/
+
+# Fichier de dépendances
+requirements.txt
+
+# Fichiers d'environnement (e.g., .env)
+.env
 
 # End of https://www.toptal.com/developers/gitignore/api/c++,visualstudiocode,git,macos
